@@ -8,23 +8,24 @@ import Today from "./Components/Today";
 import History from "./Components/History";
 
 export default function App() {
+  const [user, setUser] = useState([]);
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
           <Login  />
         </Route>
-        <Route>
-          <Register path="/cadastro" exact />
+        <Route path="/cadastro" exact>
+          <Register />
         </Route>
-        <Route>
-          <Habits path="/habitos" exact />
+        <Route path="/habitos" exact>
+          <Habits />
         </Route>
-        <Route>
-          <Today path="/hoje" exact />
+        <Route path="/hoje" exact>
+          <Today />
         </Route>
-        <Route>
-          <History path="/historico" exact />
+        <Route path="/historico" exact>
+          <History />
         </Route>
       </Switch>
     </BrowserRouter>
