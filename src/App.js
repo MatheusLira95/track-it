@@ -1,3 +1,4 @@
+import "./styles/reset.css"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import Login from "./Components/Login";
@@ -11,7 +12,7 @@ export default function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <Login path="/" exact />
+          <Login  />
         </Route>
         <Route>
           <Register path="/cadastro" exact />
