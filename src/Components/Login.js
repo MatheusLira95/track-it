@@ -16,7 +16,7 @@ export default function Login(){
 
 const Container = styled.div`
     display: flex;
-    height: 80vh;
+    height: 70vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
