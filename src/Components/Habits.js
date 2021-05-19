@@ -1,8 +1,11 @@
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import CreateHabits from "./CreateHabits";
+import Habit from "./Habit";
 import Menu from "./Menu";
 
 export default function Habits(){
+    
     return(
         <>
             <Container>
@@ -11,6 +14,8 @@ export default function Habits(){
                     <p>Meus hábitos</p>
                     <button>+</button>
                 </Header>
+               <CreateHabits />
+               <Habit />
                 <NoHabits>
                     Você não tem nenhum hábito cadastrado ainda.
                     Adicione um hábito para começar a trackear!
