@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import Logo from "../images/logo.png";
+import { useHistory } from "react-router-dom";
+
 export default function Login(){
+
+    const history = useHistory();
     return(
         <>
             <Container>
@@ -8,7 +12,7 @@ export default function Login(){
                 <input type="text" placeholder="email"></input>
                 <input type="password" placeholder="senha"></input>
                 <button>Entrar</button>
-                <p>Não tem uma conta? Cadastre-se!</p>
+                <p onClick={() => history.push("/cadastro")}>Não tem uma conta? Cadastre-se!</p>
             </Container>    
         </>
     );

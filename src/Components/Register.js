@@ -1,16 +1,47 @@
 import styled from "styled-components";
+import axios from "axios";
 import Logo from "../images/logo.png";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Loading from "./Loading";
+
+
 export default function Register(){
+    const [email, setEmail] = useState(""); 
+    const [name, setName] = useState("");
+    const [image, setImage] = useState("");
+    const [password, setPassword] = useState("");
+    const [disabled, setDisabled] = useState(false)
+
+    const history = useHistory();
+
+    function Subscribe(){
+        const body = {email, name, image, password};
+        console.log(body)
+        setDisabled(true)
+        const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
+        request.then(() => {
+            history.push("/")
+        })
+        request.catch((err) => {
+            alert("Dados inseridos incorretamente, tente novamente.")
+            setDisabled(false)
+        })
+        
+    }
+
     return(
         <>
-            <Container>
+            <Container enabled={disabled} >
                 <img src={Logo} alt="Track-it" />
-                <input type="text" placeholder="email"></input>
-                <input type="text" placeholder="senha"></input>
-                <input type="text" placeholder="nome"></input>
-                <input type="text" placeholder="foto"></input>
-                <button>Cadastrar</button>
-                <p>Já tem uma conta? Faça login!</p>
+                <input onChange={(e) => setEmail(e.target.value)} type="text" placeholder="email" disabled={disabled}></input>
+                <input onChange={(e) => setPassword(e.target.value)} type="text" placeholder="senha" disabled={disabled}></input>
+                <input onChange={(e) => setName(e.target.value)} type="text" placeholder="nome" disabled={disabled}></input>
+                <input onChange={(e) => setImage(e.target.value)} type="text" placeholder="foto" disabled={disabled}></input>
+                <button onClick={Subscribe} disabled={disabled}>
+                    {disabled ? <Loading /> : "Cadastrar"}
+                </button>
+                <p onClick={() => history.push("/")}>Já tem uma conta? Faça login!</p>
             </Container>    
         </>
     );
@@ -35,6 +66,8 @@ const Container = styled.div`
         outline: none;
         margin-bottom: 6px;
         font-size: 20px;
+        padding: 0px 10px;
+        color: #505050;
     }
     button{
         width: 303px;
@@ -46,6 +79,7 @@ const Container = styled.div`
         outline: none;
         border-radius: 5px;
         margin-bottom: 25px;
+        opacity: ${props => props.enabled ? 0.6 : 1 };
     }
     p{
         color: #52b6ff;
@@ -55,3 +89,4 @@ const Container = styled.div`
 
 
 `;
+//
