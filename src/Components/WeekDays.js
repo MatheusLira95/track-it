@@ -8,6 +8,7 @@ export default function WeekDays({ setHabitDays, habitDays }){
     const weekDays = ["D","S","T","Q","Q","S","S"];
     const {createdHab, setCreatedHab} = useContext(CreatedHabContext)
 
+
     useEffect(() => {
         setHabitDays([...createdHab])
     }, []) 

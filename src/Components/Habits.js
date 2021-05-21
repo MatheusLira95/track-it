@@ -9,28 +9,30 @@ import UserContext from "../contexts/UserContext";
 import { useContext } from "react";
 import CreatedHabContext from "../contexts/CreatedHabContext";
 
-
-export default function Habits(){
-    const {user, setUser} = useContext(UserContext);
-    const {createdHab, setHabsList, habsList} = useContext(CreatedHabContext)
-    const [enableCreate, setEnableCreate] = useState(false)
+export default function Habits() {
+    const { user, todayHabs, doneHabs } = useContext(UserContext);
+    const { createdHab, setHabsList, habsList } = useContext(CreatedHabContext);
+    const [enableCreate, setEnableCreate] = useState(false);
     const [flag, setFlag] = useState(false);
-    
-    const config = {
-        headers:{
-            "Authorization": `Bearer ${user.token}` 
-        }
-    }    
-    useEffect(() => {
-		const request = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
 
-		request.then(resp => {
+    const config = {
+        headers: {
+            Authorization: `Bearer ${user.token}`,
+        },
+    };
+    useEffect(() => {
+        const request = axios.get(
+            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits",
+            config
+        );
+
+        request.then((resp) => {
             setHabsList([...resp.data]);
             setFlag(true);
-		});
-	}, [flag]);        
-    
-    return(
+        });
+    }, [flag]);
+
+    return (
         <>
             <Container>
                 <Navbar />
@@ -38,14 +40,19 @@ export default function Habits(){
                     <p>Meus hábitos</p>
                     <button onClick={() => setEnableCreate(true)}>+</button>
                 </Header>
-               <CreateHabits flag={flag} enableCreate={enableCreate} setFlag={setFlag} setEnableCreate={setEnableCreate}/>
-               <Habit flag={flag} setFlag={setFlag}/>
+                <CreateHabits
+                    flag={flag}
+                    enableCreate={enableCreate}
+                    setFlag={setFlag}
+                    setEnableCreate={setEnableCreate}
+                />
+                <Habit flag={flag} setFlag={setFlag} />
                 <NoHabits habsList={habsList}>
-                    Você não tem nenhum hábito cadastrado ainda.
-                    Adicione um hábito para começar a trackear!
-                </NoHabits >
-                <Menu />
-            </Container>            
+                    Você não tem nenhum hábito cadastrado ainda. Adicione um
+                    hábito para começar a trackear!
+                </NoHabits>
+                <Menu todayHabs={todayHabs} doneHabs={doneHabs} />
+            </Container>
         </>
     );
 }
@@ -53,25 +60,25 @@ const Container = styled.div`
     padding: 0px 18px;
     margin-top: 70px;
     background-color: #e5e5e5;
-    height:650px;
-    font-family: 'Lexend Deca', sans-serif;
+    height: 650px;
+    font-family: "Lexend Deca", sans-serif;
     z-index: -1;
     overflow: scroll;
 `;
 
 const Header = styled.div`
-    width:100%;
+    width: 100%;
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    p{
+    p {
         color: #126ba5;
         font-size: 22.98px;
-        font-family: 'Lexend Deca', sans-serif;
+        font-family: "Lexend Deca", sans-serif;
     }
-    button{
+    button {
         font-size: 26.98px;
         color: #fff;
         width: 40px;
@@ -79,15 +86,15 @@ const Header = styled.div`
         background-color: #52b6ff;
         display: flex;
         justify-content: center;
-        align-items:center;
-        border:none;
+        align-items: center;
+        border: none;
         border-radius: 5px;
     }
 `;
 
 const NoHabits = styled.div`
     font-size: 17.98px;
-    font-family: 'Lexend Deca', sans-serif;
+    font-family: "Lexend Deca", sans-serif;
     color: #666666;
-    display: ${props => props.habsList.length === 0 ? "block" : "none"}
+    display: ${(props) => (props.habsList.length === 0 ? "block" : "none")};
 `;
