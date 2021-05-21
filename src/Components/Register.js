@@ -11,13 +11,12 @@ export default function Register(){
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
     const [password, setPassword] = useState("");
-    const [disabled, setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState(false);
 
     const history = useHistory();
 
     function Subscribe(){
         const body = {email, name, image, password};
-        console.log(body)
         setDisabled(true)
         const request = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body);
         request.then(() => {

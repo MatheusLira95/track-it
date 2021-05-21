@@ -1,36 +1,28 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import CreatedHabContext from "../contexts/CreatedHabContext";
 import { useContext } from "react";
 
-
-export default function WeekDays({ setHabitDays, habitDays }){
+export default function WeekDaysListed({ id, hab }){
     const weekDays = ["D","S","T","Q","Q","S","S"];
-    const {createdHab, setCreatedHab} = useContext(CreatedHabContext)
-
-    useEffect(() => {
-        setHabitDays([...createdHab])
-    }, []) 
-    
-    function addDay(iday){
-        if(!createdHab.find(id => id === iday)){
-            setCreatedHab([...createdHab, iday])
-        }else if(createdHab.find(id => id === iday)){
-            createdHab.splice(createdHab.indexOf(iday), 1);
-            setCreatedHab([...createdHab]);
-        }
-    }
+    const {habsList, createdHab} = useContext(CreatedHabContext)
     
     return(
-        <>
+        <>         
+                
+                    
             <WeekDaysList>
                 {weekDays.map((d, i) => {
                     return (
-                            <WeekDay isSelected={createdHab.includes((i+1))} onClick={() => addDay(i+1)} id={i+1}>{d}</WeekDay>
+                            <WeekDay isSelected={hab.days.includes(i)}id={i}>{d}</WeekDay>
                         );
                     })
                 }
             </WeekDaysList>
+            
+        
+                
+                
         </>
     );
 }
@@ -50,4 +42,5 @@ const WeekDay = styled.li`
     align-items:center;
     justify-content:center;
     background-color:${props => props.isSelected ? "#cfcfcf" : "#fff"}
+    
 `;

@@ -1,11 +1,19 @@
 import styled from "styled-components";
-import UserFoto from "../images/userfoto.png";
+import UserContext from "../contexts/UserContext";
+import { useContext } from "react";
 export default function Navbar(){
+    const {user, setUser} = useContext(UserContext)
+    
+    if(!user){
+        return(
+            "Carregando"                
+        );
+    }
     return(
         <>
             <Bar>
                 <p>TrackIt</p>
-                <img className="user" src={UserFoto} alt="UserFoto" />
+                <img className="user" src={user.image} alt="UserFoto" />
             </Bar>    
         </>
     );
@@ -23,6 +31,7 @@ const Bar = styled.div`
     left: 0;
     justify-content: space-between;
     background-color: #126BA5;
+    z-index: 2;
 
     p{
         color: #fff;

@@ -1,12 +1,14 @@
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 export default function Menu(){
+    const history = useHistory()
     return(
         <>
             <MenuBar>
-                <p>Hábitos</p>
-                <p>Histórico</p>
-                <Hoje>
+                <p onClick={() => history.push("/habitos")}>Hábitos</p>
+                <p onClick={() => history.push("/historico")}>Histórico</p>
+                <Hoje onClick={() => history.push("/hoje")}>
                     Hoje
                 </Hoje>
             </MenuBar>

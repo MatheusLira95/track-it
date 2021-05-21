@@ -1,17 +1,47 @@
 import styled from "styled-components";
-import WeekDays from "./WeekDays";
-import { TrashOutline } from 'react-ionicons'
+import WeekDaysListed from "./WeekDaysListed";
+import { TrashOutline } from 'react-ionicons';
+import CreatedHabContext from "../contexts/CreatedHabContext";
+import UserContext from "../contexts/UserContext";
+import axios from "axios";
+import { useContext } from "react";
 
-export default function Habit(){
+export default function Habit({flag, setFlag}){
+    const weekDays = ["D","S","T","Q","Q","S","S"];
+    const {createdHab, setHabsList, habsList} = useContext(CreatedHabContext);
+    const {user} = useContext(UserContext)
+
+    function deleteHab(i){
+        const resultado = window.confirm("Deseja realmente excluir este hábito meu jovem?");
+        if(resultado){
+            const config = {
+                headers:{
+                    "Authorization": `Bearer ${user.token}` 
+                }
+            }
+            const request = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habsList[i].id}`, config);
+            request.then(() => {
+                setFlag(false)
+            })
+            request.catch(() => {
+                alert("Deu ruim!")
+            })
+        }
+    }
     return(
         <>
             <Container>
                 <ul>
-                    <HabitCard>
-                        <p>Nome do hábito</p>
-                        <WeekDays />
-                        <TrashOutline cssClasses="delete" />
-                    </HabitCard>
+                    {habsList.map((hab, i) => {
+                        return(
+                            <HabitCard id={hab.id}>
+                                <p>{hab.name}</p>
+                                <WeekDaysListed id={i} hab={hab}/>
+                                <TrashOutline onClick={() => deleteHab(i)} cssClasses="delete" />
+                            </HabitCard>
+                        );
+                    })}
+                    
                 </ul>
             </Container>
         </>
@@ -19,11 +49,10 @@ export default function Habit(){
 }
 
 const Container = styled.div`
-    height: 100%;
     width:100%;
     display:flex;
     justify-content:flex-start;
-    
+    margin-bottom: 20px;
     ul{
         width:100%;
     }
@@ -39,6 +68,7 @@ const HabitCard = styled.li`
     padding:12px;
     position:relative;
     border-radius: 5px;
+    margin-bottom: 10px;
 
     p{
         font-size: 19.98px;
@@ -52,5 +82,4 @@ const HabitCard = styled.li`
         right: 10px;
         height: 17px;
     }
-
 `;
