@@ -34,7 +34,7 @@ export default function Today() {
       setFlag(false);
     });
     request.catch((err) => {});
-  }, [flag]);
+  }, [flag, done]);
 
   function Done(hab) {
     const config = {

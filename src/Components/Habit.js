@@ -7,8 +7,7 @@ import axios from "axios";
 import { useContext } from "react";
 
 export default function Habit({ flag, setFlag }) {
-  const weekDays = ["D", "S", "T", "Q", "Q", "S", "S"];
-  const { createdHab, setHabsList, habsList } = useContext(CreatedHabContext);
+  const { habsList } = useContext(CreatedHabContext);
   const { user } = useContext(UserContext);
 
   function deleteHab(i) {

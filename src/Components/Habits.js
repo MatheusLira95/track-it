@@ -11,7 +11,7 @@ import CreatedHabContext from "../contexts/CreatedHabContext";
 
 export default function Habits() {
   const { user, todayHabs, doneHabs } = useContext(UserContext);
-  const { createdHab, setHabsList, habsList } = useContext(CreatedHabContext);
+  const { setHabsList, habsList } = useContext(CreatedHabContext);
   const [enableCreate, setEnableCreate] = useState(false);
   const [flag, setFlag] = useState(false);
 
@@ -30,7 +30,7 @@ export default function Habits() {
       setHabsList([...resp.data]);
       setFlag(true);
     });
-  }, [flag]);
+  }, [flag, setHabsList]);
 
   return (
     <>

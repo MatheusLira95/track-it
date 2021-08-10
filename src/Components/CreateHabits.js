@@ -16,7 +16,7 @@ export default function CreateHabits({
   const [habitDays, setHabitDays] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const { createdHab, setCreatedHab } = useContext(CreatedHabContext);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   function saveHabit() {
     setDisabled(true);

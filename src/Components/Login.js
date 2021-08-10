@@ -12,7 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [disabled, setDisabled] = useState(false);
 
-  const { user, setUser, setTodayHabs } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   const history = useHistory();
   function LogIn(e) {
