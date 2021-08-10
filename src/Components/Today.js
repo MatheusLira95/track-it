@@ -113,7 +113,10 @@ export default function Today() {
                                 Nenhum hábito concluido ainda!
                             </p>
                             <p className="today">
-                                {percent.toFixed(2)} % dos hábitos concluídos
+                                {percent
+                                    ? percent.toFixed(2) +
+                                      " %dos hábitos concluídos"
+                                    : "Nenhum hábito para hoje"}
                             </p>
                         </Header>
                         <TodayHabList>

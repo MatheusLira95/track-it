@@ -15,7 +15,8 @@ export default function Login() {
     const { user, setUser, setTodayHabs } = useContext(UserContext);
 
     const history = useHistory();
-    function LogIn() {
+    function LogIn(e) {
+        e.preventDefault();
         const body = { email, password };
         setDisabled(true);
         const requestUser = axios.post(
@@ -38,21 +39,28 @@ export default function Login() {
         <>
             <Container enabled={disabled}>
                 <img src={Logo} alt="Track-it" />
-                <input
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="text"
-                    placeholder="email"
-                    disabled={disabled}
-                ></input>
-                <input
-                    onChange={(e) => setPassword(e.target.value)}
-                    type="password"
-                    placeholder="senha"
-                    disabled={disabled}
-                ></input>
-                <button onClick={LogIn} disabled={disabled}>
-                    {disabled ? <Loading /> : "Entrar"}
-                </button>
+                <form onSubmit={LogIn}>
+                    <label>Usuário</label>
+                    <br />
+                    <input
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        placeholder="email"
+                        disabled={disabled}
+                    ></input>
+                    <br />
+                    <label>Senha</label>
+                    <br />
+                    <input
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        placeholder="senha"
+                        disabled={disabled}
+                    ></input>
+                    <button type="submit" disabled={disabled}>
+                        {disabled ? <Loading /> : "Entrar"}
+                    </button>
+                </form>
                 <p onClick={() => history.push("/cadastro")}>
                     Não tem uma conta? Cadastre-se!
                 </p>
@@ -67,6 +75,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 0px 10px;
 
     img {
         width: 180px;
@@ -97,5 +106,14 @@ const Container = styled.div`
         color: #52b6ff;
         font-size: 13, 98px;
         text-decoration: underline;
+    }
+    label {
+        font-size: 20px;
+        color: #666;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 `;
