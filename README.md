@@ -1,6 +1,10 @@
-## You can try this App in the link: 
+## You can try this App in the link:
+
 ### -> track-it-gamma.vercel.app
 
+### - I recommend to test this app in mobile view.
+
+### - You can open the link and press Ctrl+Shift+J, then Ctrl+Shift+M
 
 # Getting Started with Create React App
 
