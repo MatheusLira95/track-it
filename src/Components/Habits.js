@@ -60,10 +60,9 @@ const Container = styled.div`
   padding: 0px 18px;
   margin-top: 70px;
   background-color: #e5e5e5;
-  height: 650px;
+  height: 100vh;
   font-family: "Lexend Deca", sans-serif;
   z-index: -1;
-  overflow: scroll;
 `;
 
 const Header = styled.div`
